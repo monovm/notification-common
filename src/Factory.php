@@ -2,7 +2,7 @@
 
 namespace AbuseIO\Notification;
 
-use Composer\Autoload\ClassMapGenerator;
+use Composer\ClassMapGenerator\ClassMapGenerator;
 use Log;
 
 /**
