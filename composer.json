@@ -1,5 +1,5 @@
 {
-    "name": "abuseio/notification-common",
+    "name": "monovm/notification-common",
     "description": "Repository for the AbuseIO notifications that holds shared methods",
     "version": "5.0.0",
     "keywords": ["laravel", "abuseio", "notification", "common"],
@@ -26,7 +26,7 @@
     },
     "autoload": {
         "psr-4": {
-            "AbuseIO\\Parser\\Notifications\\": "src/"
+            "AbuseIO\\Notification\\": "src/"
         }
     }
 }

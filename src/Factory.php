@@ -3,6 +3,7 @@
 namespace AbuseIO\Notification;
 
 use Composer\ClassMapGenerator\ClassMapGenerator;
+use Illuminate\Support\Arr;
 use Log;
 
 /**
@@ -26,9 +27,25 @@ class Factory
      */
     public static function getNotification()
     {
-        $notificationClassList = ClassMapGenerator::createMap(base_path().'/vendor/abuseio');
+        // Scan both vendor/abuseio and vendor/monovm for notification packages
+        $notificationClassList = [];
+
+        $vendorPaths = [
+            base_path().'/vendor/abuseio',
+            base_path().'/vendor/monovm',
+        ];
+
+        foreach ($vendorPaths as $path) {
+            if (is_dir($path)) {
+                $notificationClassList = array_merge(
+                    $notificationClassList,
+                    ClassMapGenerator::createMap($path)
+                );
+            }
+        }
+
         /** @noinspection PhpUnusedParameterInspection */
-        $notificationClassListFiltered = array_where(
+        $notificationClassListFiltered = Arr::where(
             array_keys($notificationClassList),
             function ($value, $key) {
                 // Get all notifications, ignore all other packages.
